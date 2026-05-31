@@ -1,3 +1,6 @@
 package com.example.educore.auth.application.commands;
 
-public record LoginCommand(String email, String password) {}
+import com.example.educore.auth.application.dto.AuthResponse;
+import com.example.educore.sharedkernel.application.Command;
+
+public record LoginCommand(String email, String password) implements Command<AuthResponse> {}
