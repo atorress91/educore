@@ -1,0 +1,47 @@
+type Mutation {
+    register(input: RegisterInput!): AuthPayload!
+    login(input: LoginInput!): AuthPayload!
+    promoteUser(input: PromoteUserInput!): UserPayload!
+}
+
+type Query {
+    me: UserPayload!
+}
+
+input RegisterInput {
+    name: String!
+    lastName: String!
+    identification: String!
+    email: String!
+    password: String!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+input PromoteUserInput {
+    userId: ID!
+    newRole: Role!
+}
+
+type AuthPayload {
+    token: String!
+    user: UserPayload!
+}
+
+type UserPayload {
+    id: ID!
+    name: String!
+    lastName: String!
+    email: String!
+    imageUrl: String
+    role: Role!
+}
+
+enum Role {
+    ADMIN
+    TEACHER
+    STUDENT
+}
