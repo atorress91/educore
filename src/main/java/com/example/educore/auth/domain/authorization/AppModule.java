@@ -1,16 +1,16 @@
 package com.example.educore.auth.domain.authorization;
 
 /**
- * Módulos (vistas) del sistema que corresponden a las secciones del dashboard.
- * Se expone en GraphQL como el enum {@code Module}.
+ * System modules (views) matching the dashboard sidebar sections.
+ * Exposed in GraphQL as the {@code Module} enum.
  */
 public enum AppModule {
     DASHBOARD,
-    ESTUDIANTES,
-    PROFESORES,
-    CURSOS,
-    ASISTENCIA,
-    CALIFICACIONES,
-    CERTIFICADOS,
-    REPORTES
+    STUDENTS,
+    TEACHERS,
+    COURSES,
+    ATTENDANCE,
+    GRADES,
+    CERTIFICATES,
+    REPORTS
 }

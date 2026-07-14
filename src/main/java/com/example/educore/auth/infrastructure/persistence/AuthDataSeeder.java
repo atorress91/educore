@@ -9,10 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * Siembra usuarios de staff (con acceso al dashboard) al arrancar, para que
- * el login funcione contra la base H2 en memoria. Es idempotente: no duplica
- * usuarios ya existentes. Los estudiantes NO se siembran aquí porque no
- * inician sesión (son solo registros de datos).
+ * Seeds staff users (with dashboard access) on startup so login works against
+ * the in-memory H2 database. Idempotent: it never duplicates existing users.
+ * Students are NOT seeded here because they don't log in (they are just data).
  */
 @Component
 @RequiredArgsConstructor
@@ -24,7 +23,7 @@ class AuthDataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
         seed("Sistema", "Admin", "0000001", "admin@liceojjjn.edu.cr", "admin123", Role.ADMIN);
-        seed("Ana", "Administrativa", "0000002", "administrativo@liceojjjn.edu.cr", "admin123", Role.ADMINISTRATIVO);
+        seed("Ana", "Administrativa", "0000002", "administrativo@liceojjjn.edu.cr", "admin123", Role.STAFF);
         seed("Carlos", "Ruiz", "0000003", "docente@liceojjjn.edu.cr", "docente123", Role.TEACHER);
     }
 

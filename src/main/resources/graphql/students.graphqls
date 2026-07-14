@@ -1,0 +1,71 @@
+extend type Query {
+    students: [Student!]!
+    curriculum(level: Level!): [Subject!]!
+}
+
+extend type Mutation {
+    enrollStudent(input: EnrollStudentInput!): Student!
+    deleteStudent(id: ID!): Boolean!
+}
+
+input EnrollStudentInput {
+    firstName: String!
+    lastName: String!
+    identification: String!
+    phone: String!
+    level: Level!
+    section: String!
+    province: String!
+    canton: String!
+    district: String!
+    address: String!
+    guardianName: String!
+    guardianPhone: String!
+}
+
+type Student {
+    id: ID!
+    code: String!
+    firstName: String!
+    lastName: String!
+    identification: String!
+    phone: String!
+    email: String
+    level: Level!
+    section: String!
+    province: String!
+    canton: String!
+    district: String!
+    address: String!
+    guardianName: String!
+    guardianPhone: String!
+    status: StudentStatus!
+    enrolledAt: String!
+    subjects: [Subject!]!
+    imageUrl: String
+}
+
+enum Level {
+    SEVEN
+    EIGHT
+    NINE
+    TEN
+    ELEVEN
+}
+
+enum StudentStatus {
+    ACTIVE
+    INACTIVE
+}
+
+enum Subject {
+    SOCIAL_STUDIES
+    SCIENCE
+    MATHEMATICS
+    ENGLISH
+    SPANISH
+    ETHICS
+    ACCOUNTING
+    CIVICS
+    BIOLOGY
+}

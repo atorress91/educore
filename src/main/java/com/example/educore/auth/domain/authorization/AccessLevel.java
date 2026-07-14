@@ -1,8 +1,8 @@
 package com.example.educore.auth.domain.authorization;
 
 /**
- * Nivel de acceso que un rol tiene sobre un módulo del sistema.
- * WRITE implica READ. NONE se omite (el módulo no se muestra).
+ * Access a role has over a system module.
+ * WRITE implies READ. NONE is omitted (the module is hidden).
  */
 public enum AccessLevel {
     NONE,

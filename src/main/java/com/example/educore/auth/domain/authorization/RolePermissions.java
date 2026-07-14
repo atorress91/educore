@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Matriz de autorización: qué nivel de acceso (READ/WRITE) tiene cada rol
- * sobre cada módulo del sistema. Este es el ÚNICO lugar a editar para
- * cambiar los permisos de una vista.
+ * Authorization matrix: which access level (READ/WRITE) each role has over
+ * each system module. This is the ONLY place to edit a view's permissions.
  *
  * <ul>
- *   <li>ADMIN y ADMINISTRATIVO: escritura total.</li>
- *   <li>TEACHER (profesor): escribe Asistencia y Calificaciones; el resto lo ve.</li>
- *   <li>STUDENT: sin acceso al dashboard (solo es un registro de datos).</li>
+ *   <li>ADMIN and STAFF: full write access.</li>
+ *   <li>TEACHER: writes Attendance and Grades; reads the rest.</li>
+ *   <li>STUDENT: no dashboard access (just a data record).</li>
  * </ul>
  */
 public final class RolePermissions {
@@ -24,7 +23,7 @@ public final class RolePermissions {
 
     private RolePermissions() {}
 
-    /** Permisos efectivos del rol, ordenados por módulo, omitiendo los NONE. */
+    /** Effective permissions for the role, ordered by module, omitting NONE. */
     public static List<ModulePermission> forRole(Role role) {
         return MATRIX.getOrDefault(role, Map.of()).entrySet().stream()
                 .filter(entry -> entry.getValue() != AccessLevel.NONE)
@@ -37,17 +36,17 @@ public final class RolePermissions {
         Map<Role, Map<AppModule, AccessLevel>> matrix = new EnumMap<>(Role.class);
 
         matrix.put(Role.ADMIN, allWrite());
-        matrix.put(Role.ADMINISTRATIVO, allWrite());
+        matrix.put(Role.STAFF, allWrite());
 
         Map<AppModule, AccessLevel> teacher = new EnumMap<>(AppModule.class);
         teacher.put(AppModule.DASHBOARD, AccessLevel.READ);
-        teacher.put(AppModule.ESTUDIANTES, AccessLevel.READ);
-        teacher.put(AppModule.PROFESORES, AccessLevel.NONE);
-        teacher.put(AppModule.CURSOS, AccessLevel.READ);
-        teacher.put(AppModule.ASISTENCIA, AccessLevel.WRITE);
-        teacher.put(AppModule.CALIFICACIONES, AccessLevel.WRITE);
-        teacher.put(AppModule.CERTIFICADOS, AccessLevel.NONE);
-        teacher.put(AppModule.REPORTES, AccessLevel.READ);
+        teacher.put(AppModule.STUDENTS, AccessLevel.READ);
+        teacher.put(AppModule.TEACHERS, AccessLevel.NONE);
+        teacher.put(AppModule.COURSES, AccessLevel.READ);
+        teacher.put(AppModule.ATTENDANCE, AccessLevel.WRITE);
+        teacher.put(AppModule.GRADES, AccessLevel.WRITE);
+        teacher.put(AppModule.CERTIFICATES, AccessLevel.NONE);
+        teacher.put(AppModule.REPORTS, AccessLevel.READ);
         matrix.put(Role.TEACHER, teacher);
 
         matrix.put(Role.STUDENT, Map.of());

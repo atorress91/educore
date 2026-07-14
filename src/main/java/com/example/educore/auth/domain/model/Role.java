@@ -2,7 +2,7 @@ package com.example.educore.auth.domain.model;
 
 public enum Role {
     ADMIN,
-    ADMINISTRATIVO,
+    STAFF,
     TEACHER,
     STUDENT
 }
