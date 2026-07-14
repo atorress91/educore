@@ -1,8 +1,11 @@
 package com.example.educore.auth.application.dto;
 
+import com.example.educore.auth.domain.authorization.ModulePermission;
+import com.example.educore.auth.domain.authorization.RolePermissions;
 import com.example.educore.auth.domain.model.Role;
 import com.example.educore.auth.domain.model.User;
 
+import java.util.List;
 import java.util.UUID;
 
 public record UserResponse(
@@ -11,7 +14,8 @@ public record UserResponse(
         String lastName,
         String email,
         String imageUrl,
-        Role role
+        Role role,
+        List<ModulePermission> permissions
 ) {
     public static UserResponse fromUser(User user) {
         return new UserResponse(
@@ -20,7 +24,8 @@ public record UserResponse(
                 user.getLastName(),
                 user.getEmail(),
                 user.getImageUrl(),
-                user.getRole()
+                user.getRole(),
+                RolePermissions.forRole(user.getRole())
         );
     }
 }

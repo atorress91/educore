@@ -38,10 +38,34 @@ type UserPayload {
     email: String!
     imageUrl: String
     role: Role!
+    permissions: [ModulePermission!]!
+}
+
+type ModulePermission {
+    module: Module!
+    level: AccessLevel!
 }
 
 enum Role {
     ADMIN
+    ADMINISTRATIVO
     TEACHER
     STUDENT
+}
+
+enum Module {
+    DASHBOARD
+    ESTUDIANTES
+    PROFESORES
+    CURSOS
+    ASISTENCIA
+    CALIFICACIONES
+    CERTIFICADOS
+    REPORTES
+}
+
+enum AccessLevel {
+    NONE
+    READ
+    WRITE
 }
