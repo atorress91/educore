@@ -1,8 +1,10 @@
 package com.example.educore.students.application.commands;
 
 import com.example.educore.sharedkernel.application.Command;
+import com.example.educore.sharedkernel.domain.Level;
 import com.example.educore.students.application.dto.StudentResponse;
-import com.example.educore.students.domain.model.Level;
+
+import java.util.List;
 
 public record EnrollStudentCommand(
         String firstName,
@@ -16,5 +18,6 @@ public record EnrollStudentCommand(
         String district,
         String address,
         String guardianName,
-        String guardianPhone
+        String guardianPhone,
+        List<String> subjects
 ) implements Command<StudentResponse> {}

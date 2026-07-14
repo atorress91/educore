@@ -1,6 +1,5 @@
 extend type Query {
     students: [Student!]!
-    curriculum(level: Level!): [Subject!]!
 }
 
 extend type Mutation {
@@ -21,6 +20,7 @@ input EnrollStudentInput {
     address: String!
     guardianName: String!
     guardianPhone: String!
+    subjects: [String!]!
 }
 
 type Student {
@@ -31,6 +31,7 @@ type Student {
     identification: String!
     phone: String!
     email: String
+    academicYear: Int!
     level: Level!
     section: String!
     province: String!
@@ -41,31 +42,11 @@ type Student {
     guardianPhone: String!
     status: StudentStatus!
     enrolledAt: String!
-    subjects: [Subject!]!
+    subjects: [String!]!
     imageUrl: String
-}
-
-enum Level {
-    SEVEN
-    EIGHT
-    NINE
-    TEN
-    ELEVEN
 }
 
 enum StudentStatus {
     ACTIVE
     INACTIVE
-}
-
-enum Subject {
-    SOCIAL_STUDIES
-    SCIENCE
-    MATHEMATICS
-    ENGLISH
-    SPANISH
-    ETHICS
-    ACCOUNTING
-    CIVICS
-    BIOLOGY
 }

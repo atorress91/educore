@@ -1,9 +1,8 @@
 package com.example.educore.students.application.dto;
 
-import com.example.educore.students.domain.model.Level;
+import com.example.educore.sharedkernel.domain.Level;
 import com.example.educore.students.domain.model.Student;
 import com.example.educore.students.domain.model.StudentStatus;
-import com.example.educore.students.domain.model.Subject;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +15,7 @@ public record StudentResponse(
         String identification,
         String phone,
         String email,
+        int academicYear,
         Level level,
         String section,
         String province,
@@ -26,7 +26,7 @@ public record StudentResponse(
         String guardianPhone,
         StudentStatus status,
         String enrolledAt,
-        List<Subject> subjects,
+        List<String> subjects,
         String imageUrl
 ) {
     public static StudentResponse fromStudent(Student student) {
@@ -38,6 +38,7 @@ public record StudentResponse(
                 student.getIdentification(),
                 student.getPhone(),
                 student.getEmail(),
+                student.getAcademicYear(),
                 student.getLevel(),
                 student.getSection(),
                 student.getProvince(),

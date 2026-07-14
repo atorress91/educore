@@ -17,4 +17,22 @@ public class StudentException extends DomainException {
     public static StudentException notFound() {
         return new StudentException("STUDENT_NOT_FOUND", "Estudiante no encontrado");
     }
+
+    public static StudentException invalidSection(String section) {
+        return new StudentException(
+                "STUDENT_INVALID_SECTION",
+                "La sección '" + section + "' no existe para ese nivel en el curso lectivo");
+    }
+
+    public static StudentException noSubjectsSelected() {
+        return new StudentException(
+                "STUDENT_NO_SUBJECTS",
+                "Debe seleccionar al menos una materia");
+    }
+
+    public static StudentException invalidSubject(String subject) {
+        return new StudentException(
+                "STUDENT_INVALID_SUBJECT",
+                "La materia '" + subject + "' no pertenece al plan del nivel");
+    }
 }

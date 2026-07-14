@@ -1,8 +1,11 @@
 package com.example.educore.students.infrastructure.graphql;
 
-import com.example.educore.students.domain.model.Level;
+import com.example.educore.sharedkernel.domain.Level;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 public record EnrollStudentInput(
         @NotBlank String firstName,
@@ -16,5 +19,6 @@ public record EnrollStudentInput(
         @NotBlank String district,
         @NotBlank String address,
         @NotBlank String guardianName,
-        @NotBlank String guardianPhone
+        @NotBlank String guardianPhone,
+        @NotEmpty List<String> subjects
 ) {}

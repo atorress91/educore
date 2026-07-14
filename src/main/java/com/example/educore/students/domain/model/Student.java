@@ -1,6 +1,7 @@
 package com.example.educore.students.domain.model;
 
 import com.example.educore.sharedkernel.domain.AggregateRoot;
+import com.example.educore.sharedkernel.domain.Level;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +40,9 @@ public class Student extends AggregateRoot {
 
     @Column
     private String email;
+
+    @Column(nullable = false)
+    private int academicYear;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -76,19 +81,19 @@ public class Student extends AggregateRoot {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "student_subjects", joinColumns = @JoinColumn(name = "student_id"))
-    @Enumerated(EnumType.STRING)
     @Column(name = "subject", nullable = false)
-    private List<Subject> subjects;
+    private List<String> subjects = new ArrayList<>();
 
     private Student(String code, String firstName, String lastName, String identification, String phone,
-                    Level level, String section, String province, String canton, String district, String address,
-                    String guardianName, String guardianPhone) {
+                    int academicYear, Level level, String section, String province, String canton, String district,
+                    String address, String guardianName, String guardianPhone, List<String> subjects) {
         this.id = UUID.randomUUID();
         this.code = code;
         this.firstName = firstName;
         this.lastName = lastName;
         this.identification = identification;
         this.phone = phone;
+        this.academicYear = academicYear;
         this.level = level;
         this.section = section;
         this.province = province;
@@ -99,14 +104,15 @@ public class Student extends AggregateRoot {
         this.guardianPhone = guardianPhone;
         this.status = StudentStatus.ACTIVE;
         this.enrolledAt = LocalDate.now();
-        this.subjects = Curriculum.forLevel(level);
+        this.subjects = new ArrayList<>(subjects);
     }
 
-    /** Enrolls a new student: active status, today's date, subjects from the level plan. */
+    /** Enrolls a new student in the given academic year with the selected subjects. */
     public static Student enroll(String code, String firstName, String lastName, String identification, String phone,
-                                 Level level, String section, String province, String canton, String district,
-                                 String address, String guardianName, String guardianPhone) {
-        return new Student(code, firstName, lastName, identification, phone, level, section,
-                province, canton, district, address, guardianName, guardianPhone);
+                                 int academicYear, Level level, String section, String province, String canton,
+                                 String district, String address, String guardianName, String guardianPhone,
+                                 List<String> subjects) {
+        return new Student(code, firstName, lastName, identification, phone, academicYear, level, section,
+                province, canton, district, address, guardianName, guardianPhone, subjects);
     }
 }

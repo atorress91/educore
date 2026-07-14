@@ -1,7 +1,8 @@
-package com.example.educore.students.domain.model;
+package com.example.educore.sharedkernel.domain;
 
 /**
- * Academic level (7th–11th grade of the night high school).
+ * Academic level (7th–11th grade of the night high school). Shared kernel:
+ * both the students and courses modules agree on this concept.
  */
 public enum Level {
     SEVEN(7),

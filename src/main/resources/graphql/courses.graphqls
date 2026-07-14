@@ -1,0 +1,44 @@
+extend type Query {
+    activeAcademicYear: AcademicYear
+    academicYears: [AcademicYear!]!
+    curriculum(level: Level!): [String!]!
+    sections(level: Level!): [String!]!
+}
+
+extend type Mutation {
+    createAcademicYear(year: Int!, startDate: String!, endDate: String!): AcademicYear!
+    closeAcademicYear(id: ID!): AcademicYear!
+    addSubjectToLevel(level: Level!, subject: String!): AcademicYear!
+    removeSubjectFromLevel(level: Level!, subject: String!): AcademicYear!
+    addSectionToLevel(level: Level!, section: String!): AcademicYear!
+    removeSectionFromLevel(level: Level!, section: String!): AcademicYear!
+}
+
+type AcademicYear {
+    id: ID!
+    year: Int!
+    status: AcademicYearStatus!
+    startDate: String!
+    endDate: String!
+    modality: String!
+    levels: [LevelPlan!]!
+}
+
+type LevelPlan {
+    level: Level!
+    sections: [String!]!
+    subjects: [String!]!
+}
+
+enum AcademicYearStatus {
+    ACTIVE
+    CLOSED
+}
+
+enum Level {
+    SEVEN
+    EIGHT
+    NINE
+    TEN
+    ELEVEN
+}

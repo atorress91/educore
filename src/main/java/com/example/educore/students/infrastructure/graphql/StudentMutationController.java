@@ -36,7 +36,8 @@ public class StudentMutationController {
                 input.district(),
                 input.address(),
                 input.guardianName(),
-                input.guardianPhone()
+                input.guardianPhone(),
+                input.subjects()
         ));
     }
 
