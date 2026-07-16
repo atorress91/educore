@@ -41,4 +41,9 @@ public class CourseQueryController {
     public List<String> sections(@Argument Level level) {
         return coursesApi.sectionsFor(level);
     }
+
+    @QueryMapping
+    public List<String> allSubjects() {
+        return coursesApi.allSubjects();
+    }
 }

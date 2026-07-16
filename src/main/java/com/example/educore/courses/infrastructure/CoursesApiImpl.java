@@ -34,6 +34,15 @@ class CoursesApiImpl implements CoursesApi {
         return activeYearOrThrow().planOf(level).getSections();
     }
 
+    @Override
+    public List<String> allSubjects() {
+        return activeYearOrThrow().getLevels().stream()
+                .flatMap(plan -> plan.getSubjects().stream())
+                .distinct()
+                .sorted()
+                .toList();
+    }
+
     private AcademicYear activeYearOrThrow() {
         return academicYearRepository.findFirstByStatusOrderByYearDesc(AcademicYearStatus.ACTIVE)
                 .orElseThrow(CourseException::noActiveYear);

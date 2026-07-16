@@ -1,0 +1,55 @@
+extend type Query {
+    teachers: [Teacher!]!
+    assignments(level: Level!): [TeacherAssignment!]!
+}
+
+extend type Mutation {
+    createTeacher(input: CreateTeacherInput!): Teacher!
+    updateTeacher(id: ID!, input: UpdateTeacherInput!): Teacher!
+    deleteTeacher(id: ID!): Boolean!
+    assignTeacher(level: Level!, section: String!, subject: String!, teacherId: ID!): TeacherAssignment!
+    unassignTeacher(level: Level!, section: String!, subject: String!): Boolean!
+}
+
+type TeacherAssignment {
+    level: Level!
+    section: String!
+    subject: String!
+    teacherId: ID!
+    teacherName: String!
+}
+
+input CreateTeacherInput {
+    fullName: String!
+    email: String!
+    phone: String!
+    subject: String!
+    hiredAt: String!
+    status: TeacherStatus!
+}
+
+input UpdateTeacherInput {
+    fullName: String!
+    email: String!
+    phone: String!
+    subject: String!
+    hiredAt: String!
+    status: TeacherStatus!
+}
+
+type Teacher {
+    id: ID!
+    code: String!
+    fullName: String!
+    email: String!
+    phone: String!
+    subject: String!
+    status: TeacherStatus!
+    hiredAt: String!
+    imageUrl: String
+}
+
+enum TeacherStatus {
+    ACTIVE
+    INACTIVE
+}

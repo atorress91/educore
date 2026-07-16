@@ -19,4 +19,7 @@ public interface CoursesApi {
 
     /** Sections available for the level in the active year. */
     List<String> sectionsFor(Level level);
+
+    /** Distinct subjects across all levels of the active year (teacher specialties). */
+    List<String> allSubjects();
 }

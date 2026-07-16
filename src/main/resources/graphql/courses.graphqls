@@ -3,6 +3,7 @@ extend type Query {
     academicYears: [AcademicYear!]!
     curriculum(level: Level!): [String!]!
     sections(level: Level!): [String!]!
+    allSubjects: [String!]!
 }
 
 extend type Mutation {
