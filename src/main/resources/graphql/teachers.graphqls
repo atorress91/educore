@@ -1,6 +1,14 @@
 extend type Query {
     teachers: [Teacher!]!
     assignments(level: Level!): [TeacherAssignment!]!
+    allAssignments: [TeacherAssignment!]!
+    myGroups: [TeacherGroup!]!
+}
+
+type TeacherGroup {
+    level: Level!
+    section: String!
+    subject: String!
 }
 
 extend type Mutation {

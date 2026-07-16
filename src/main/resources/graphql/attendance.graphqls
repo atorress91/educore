@@ -1,0 +1,41 @@
+extend type Query {
+    attendance(level: Level!, section: String!, subject: String!, date: String!): [AttendanceEntry!]!
+    attendanceSummary(date: String!): [AttendanceSummary!]!
+}
+
+extend type Mutation {
+    saveAttendance(
+        level: Level!,
+        section: String!,
+        subject: String!,
+        date: String!,
+        entries: [AttendanceEntryInput!]!
+    ): Boolean!
+}
+
+input AttendanceEntryInput {
+    studentId: ID!
+    status: AttendanceStatus!
+}
+
+type AttendanceEntry {
+    studentId: ID!
+    status: AttendanceStatus!
+}
+
+type AttendanceSummary {
+    level: Level!
+    section: String!
+    subject: String!
+    present: Int!
+    absent: Int!
+    late: Int!
+    justified: Int!
+}
+
+enum AttendanceStatus {
+    PRESENT
+    ABSENT
+    LATE
+    JUSTIFIED
+}

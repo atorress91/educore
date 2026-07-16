@@ -44,6 +44,14 @@ class StudentDataSeeder implements CommandLineRunner {
                 "Cartago", "Cartago", "Oriental", "Contiguo a la iglesia", "Marta Vargas", "+506 8833-3333", THIRD_CYCLE);
         enroll("José Luis", "Mora", "4-4444-4444", "+506 8888-3456", Level.TEN, "A",
                 "Heredia", "Heredia", "Heredia", "200 m sur del super", "Carmen Mora", "+506 8844-4444", DIVERSIFIED);
+        enroll("Laura", "Jiménez Soto", "5-5555-5555", "+506 8888-7890", Level.SEVEN, "A",
+                "San José", "Desamparados", "San Rafael", "Del parque 300 m este", "Rita Soto", "+506 8855-5555", THIRD_CYCLE);
+        enroll("Diego", "Fernández Ruiz", "6-6666-6666", "+506 8888-2345", Level.SEVEN, "A",
+                "San José", "Goicoechea", "Guadalupe", "Contiguo al EBAIS", "Marco Fernández", "+506 8866-6666", THIRD_CYCLE);
+        enroll("Sofía", "Alvarado Morales", "7-7777-7777", "+506 8888-6789", Level.SEVEN, "B",
+                "Cartago", "La Unión", "Tres Ríos", "50 m norte de la escuela", "Elena Morales", "+506 8877-7777", THIRD_CYCLE);
+        enroll("Miguel Ángel", "Castro", "8-8888-8888", "+506 8888-0123", Level.SEVEN, "B",
+                "Heredia", "San Rafael", "San Josecito", "Frente a la plaza", "Ana Castro", "+506 8888-8888", THIRD_CYCLE);
     }
 
     private void enroll(String firstName, String lastName, String identification, String phone, Level level,

@@ -12,5 +12,7 @@ public interface TeacherRepository {
 
     List<Teacher> findAllByOrderByCodeAsc();
 
+    Optional<Teacher> findByEmail(String email);
+
     long count();
 }

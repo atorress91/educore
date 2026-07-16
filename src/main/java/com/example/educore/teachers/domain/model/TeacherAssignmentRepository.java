@@ -11,6 +11,10 @@ public interface TeacherAssignmentRepository {
 
     List<TeacherAssignment> findByYearAndLevel(int year, Level level);
 
+    List<TeacherAssignment> findByYear(int year);
+
+    List<TeacherAssignment> findByYearAndTeacherId(int year, java.util.UUID teacherId);
+
     Optional<TeacherAssignment> findByYearAndLevelAndSectionAndSubject(
             int year, Level level, String section, String subject);
 

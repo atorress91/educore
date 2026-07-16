@@ -28,7 +28,9 @@ class TeacherDataSeeder implements CommandLineRunner {
             return;
         }
 
-        hire("Dr. Carlos Ruiz Hernández", "carlos.ruiz@colegio.edu", "+506 8777-1234",
+        // Carlos's email matches the seeded TEACHER login so the attendance view
+        // can map the logged-in account to this teacher and load his groups.
+        hire("Dr. Carlos Ruiz Hernández", "docente@liceojjjn.edu.cr", "+506 8777-1234",
                 "Estudios Sociales", LocalDate.of(2020, 3, 14));
         hire("Lic. Patricia Mora Jiménez", "patricia.mora@colegio.edu", "+506 8777-5678",
                 "Matemáticas", LocalDate.of(2019, 8, 19));
