@@ -1,0 +1,10 @@
+# Reverse proxy con HTTPS automático (Let's Encrypt) para EduCore.
+# El dominio sslip.io resuelve a la IP externa de la VM (35.225.232.209).
+{
+	email andres91411@gmail.com
+}
+
+35-225-232-209.sslip.io {
+	encode gzip
+	reverse_proxy backend:8080
+}

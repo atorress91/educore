@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: .
+    image: educore-backend:latest
+    container_name: educore-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      EDUCORE_JWT_SECRET: ${EDUCORE_JWT_SECRET}
+      EDUCORE_JWT_EXPIRATION_MS: ${EDUCORE_JWT_EXPIRATION_MS:-86400000}
+      JAVA_OPTS: ${JAVA_OPTS:--XX:MaxRAMPercentage=75.0}
