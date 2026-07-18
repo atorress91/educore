@@ -1,0 +1,21 @@
+extend type Query {
+    issuedCertificates: [IssuedCertificate!]!
+}
+
+extend type Mutation {
+    issueCertificate(type: CertificateType!, studentId: ID!): IssuedCertificate!
+}
+
+type IssuedCertificate {
+    id: ID!
+    type: CertificateType!
+    studentId: ID!
+    number: Int!
+    year: Int!
+    issuedAt: String!
+}
+
+enum CertificateType {
+    GRADES
+    ENROLLMENT
+}

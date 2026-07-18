@@ -14,6 +14,8 @@ public interface JpaGradeRepository extends JpaRepository<GradeRecord, UUID>, Gr
     List<GradeRecord> findByYearAndLevelAndSectionAndSubject(
             int year, Level level, String section, String subject);
 
+    List<GradeRecord> findByYearAndLevelAndSection(int year, Level level, String section);
+
     Optional<GradeRecord> findByYearAndLevelAndSectionAndSubjectAndStudentId(
             int year, Level level, String section, String subject, UUID studentId);
 }

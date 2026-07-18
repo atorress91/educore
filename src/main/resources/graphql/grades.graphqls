@@ -1,5 +1,6 @@
 extend type Query {
     grades(level: Level!, section: String!, subject: String!): [GradeEntry!]!
+    sectionGrades(level: Level!, section: String!): [SectionGrade!]!
 }
 
 extend type Mutation {
@@ -21,6 +22,16 @@ input GradeEntryInput {
 }
 
 type GradeEntry {
+    studentId: ID!
+    trim1: Int
+    trim2: Int
+    trim3: Int
+    ampl1: Int
+    ampl2: Int
+}
+
+type SectionGrade {
+    subject: String!
     studentId: ID!
     trim1: Int
     trim2: Int
