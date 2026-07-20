@@ -27,6 +27,7 @@ public class TeacherQueryController {
     private final Mediator mediator;
 
     @QueryMapping
+    @PreAuthorize("@perm.can('TEACHERS','READ')")
     public List<TeacherResponse> teachers() {
         return mediator.ask(new GetTeachersQuery());
     }

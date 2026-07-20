@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("@perm.can('ATTENDANCE','READ')")
 @RequiredArgsConstructor
 public class AttendanceQueryController {
 

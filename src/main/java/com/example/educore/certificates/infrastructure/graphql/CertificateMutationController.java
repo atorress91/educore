@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import java.util.UUID;
 
 @Controller
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+@PreAuthorize("@perm.can('CERTIFICATES','WRITE')")
 @RequiredArgsConstructor
 public class CertificateMutationController {
 

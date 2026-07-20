@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+@PreAuthorize("@perm.can('CERTIFICATES','READ')")
 @RequiredArgsConstructor
 public class CertificateQueryController {
 

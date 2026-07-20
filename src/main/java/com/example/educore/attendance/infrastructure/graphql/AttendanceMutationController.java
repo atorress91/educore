@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @Validated
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF', 'TEACHER')")
+@PreAuthorize("@perm.can('ATTENDANCE','WRITE')")
 @RequiredArgsConstructor
 public class AttendanceMutationController {
 

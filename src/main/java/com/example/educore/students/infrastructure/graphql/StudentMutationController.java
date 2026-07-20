@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Controller
 @Validated
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+@PreAuthorize("@perm.can('STUDENTS','WRITE')")
 @RequiredArgsConstructor
 public class StudentMutationController {
 

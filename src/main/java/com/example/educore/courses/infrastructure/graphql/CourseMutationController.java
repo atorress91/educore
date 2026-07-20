@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+@PreAuthorize("@perm.can('COURSES','WRITE')")
 @RequiredArgsConstructor
 public class CourseMutationController {
 

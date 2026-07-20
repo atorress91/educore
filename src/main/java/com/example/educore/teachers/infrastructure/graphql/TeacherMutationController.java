@@ -22,13 +22,13 @@ import java.util.UUID;
 
 @Controller
 @Validated
-@PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
 @RequiredArgsConstructor
 public class TeacherMutationController {
 
     private final Mediator mediator;
 
     @MutationMapping
+    @PreAuthorize("@perm.can('TEACHERS','WRITE')")
     public TeacherResponse createTeacher(@Argument @Valid CreateTeacherInput input) {
         return mediator.send(new CreateTeacherCommand(
                 input.fullName(),
@@ -41,6 +41,7 @@ public class TeacherMutationController {
     }
 
     @MutationMapping
+    @PreAuthorize("@perm.can('TEACHERS','WRITE')")
     public TeacherResponse updateTeacher(@Argument UUID id, @Argument @Valid UpdateTeacherInput input) {
         return mediator.send(new UpdateTeacherCommand(
                 id,
@@ -54,17 +55,21 @@ public class TeacherMutationController {
     }
 
     @MutationMapping
+    @PreAuthorize("@perm.can('TEACHERS','WRITE')")
     public Boolean deleteTeacher(@Argument UUID id) {
         return mediator.send(new DeleteTeacherCommand(id));
     }
 
+    // Assigning teachers to sections is part of the Courses view.
     @MutationMapping
+    @PreAuthorize("@perm.can('COURSES','WRITE')")
     public TeacherAssignmentResponse assignTeacher(@Argument Level level, @Argument String section,
                                                    @Argument String subject, @Argument UUID teacherId) {
         return mediator.send(new AssignTeacherCommand(level, section, subject, teacherId));
     }
 
     @MutationMapping
+    @PreAuthorize("@perm.can('COURSES','WRITE')")
     public Boolean unassignTeacher(@Argument Level level, @Argument String section, @Argument String subject) {
         return mediator.send(new UnassignTeacherCommand(level, section, subject));
     }

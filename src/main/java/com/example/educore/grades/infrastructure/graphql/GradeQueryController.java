@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("@perm.can('GRADES','READ')")
 @RequiredArgsConstructor
 public class GradeQueryController {
 
