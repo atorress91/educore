@@ -6,6 +6,11 @@ services:
     container_name: educore-backend
     restart: unless-stopped
     env_file: /opt/educore/.env
+    environment:
+      # Origen(es) permitidos por CORS. Debe incluir el dominio del frontend
+      # desplegado; separar por comas si hay más de uno. Sobreescribe el
+      # default de dev (http://localhost:3000).
+      EDUCORE_CORS_ALLOWED_ORIGINS: https://34-45-175-192.sslip.io
     networks: [educore-net]
     mem_limit: 768m
     memswap_limit: 2g
