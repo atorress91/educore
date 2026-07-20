@@ -1,5 +1,6 @@
 package com.example.educore.auth.application.commands;
 
+import com.example.educore.auth.application.authorization.RolePermissionService;
 import com.example.educore.auth.application.dto.UserResponse;
 import com.example.educore.auth.domain.exceptions.AuthException;
 import com.example.educore.auth.domain.model.User;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PromoteUserCommandHandler implements CommandHandler<PromoteUserCommand, UserResponse> {
 
     private final UserRepository userRepository;
+    private final RolePermissionService rolePermissionService;
 
     @Override
     public UserResponse handle(PromoteUserCommand command) {
@@ -24,6 +26,6 @@ public class PromoteUserCommandHandler implements CommandHandler<PromoteUserComm
         user.promoteTo(command.newRole());
         userRepository.save(user);
 
-        return UserResponse.fromUser(user);
+        return UserResponse.of(user, rolePermissionService.effectiveFor(user.getRole()));
     }
 }

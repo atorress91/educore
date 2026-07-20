@@ -1,7 +1,6 @@
 package com.example.educore.auth.application.dto;
 
 import com.example.educore.auth.domain.authorization.ModulePermission;
-import com.example.educore.auth.domain.authorization.RolePermissions;
 import com.example.educore.auth.domain.model.Role;
 import com.example.educore.auth.domain.model.User;
 
@@ -17,7 +16,8 @@ public record UserResponse(
         Role role,
         List<ModulePermission> permissions
 ) {
-    public static UserResponse fromUser(User user) {
+    /** Builds the response with the role's effective (dynamic) permissions. */
+    public static UserResponse of(User user, List<ModulePermission> permissions) {
         return new UserResponse(
                 user.getId(),
                 user.getName(),
@@ -25,7 +25,7 @@ public record UserResponse(
                 user.getEmail(),
                 user.getImageUrl(),
                 user.getRole(),
-                RolePermissions.forRole(user.getRole())
+                permissions
         );
     }
 }

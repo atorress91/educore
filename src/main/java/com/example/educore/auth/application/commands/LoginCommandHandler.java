@@ -1,5 +1,6 @@
 package com.example.educore.auth.application.commands;
 
+import com.example.educore.auth.application.authorization.RolePermissionService;
 import com.example.educore.auth.application.dto.AuthResponse;
 import com.example.educore.auth.application.dto.UserResponse;
 import com.example.educore.auth.domain.exceptions.AuthException;
@@ -20,6 +21,7 @@ public class LoginCommandHandler implements CommandHandler<LoginCommand, AuthRes
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenIssuer tokenIssuer;
+    private final RolePermissionService rolePermissionService;
 
     @Override
     public AuthResponse handle(LoginCommand command) {
@@ -31,6 +33,6 @@ public class LoginCommandHandler implements CommandHandler<LoginCommand, AuthRes
         }
 
         String token = tokenIssuer.issueFor(user);
-        return new AuthResponse(token, UserResponse.fromUser(user));
+        return new AuthResponse(token, UserResponse.of(user, rolePermissionService.effectiveFor(user.getRole())));
     }
 }

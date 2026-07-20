@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Authorization matrix: which access level (READ/WRITE) each role has over
- * each system module. This is the ONLY place to edit a view's permissions.
+ * Default authorization matrix: the access level (READ/WRITE) each role starts
+ * with over each system module. These values only seed the persisted
+ * {@link RolePermissionSetting} table on first startup; afterwards an ADMIN can
+ * edit them at runtime and the effective permissions come from the database
+ * (see {@code RolePermissionService}).
  *
  * <ul>
  *   <li>ADMIN and STAFF: full write access.</li>
@@ -23,7 +26,12 @@ public final class RolePermissions {
 
     private RolePermissions() {}
 
-    /** Effective permissions for the role, ordered by module, omitting NONE. */
+    /** Default level for a (role, module) pair, NONE when unspecified. */
+    public static AccessLevel defaultLevel(Role role, AppModule module) {
+        return MATRIX.getOrDefault(role, Map.of()).getOrDefault(module, AccessLevel.NONE);
+    }
+
+    /** Default permissions for the role, ordered by module, omitting NONE. */
     public static List<ModulePermission> forRole(Role role) {
         return MATRIX.getOrDefault(role, Map.of()).entrySet().stream()
                 .filter(entry -> entry.getValue() != AccessLevel.NONE)

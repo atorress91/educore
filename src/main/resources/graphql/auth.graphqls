@@ -2,10 +2,28 @@ type Mutation {
     register(input: RegisterInput!): AuthPayload!
     login(input: LoginInput!): AuthPayload!
     promoteUser(input: PromoteUserInput!): UserPayload!
+    updateRolePermissions(input: UpdateRolePermissionsInput!): [RolePermissions!]!
 }
 
 type Query {
     me: UserPayload!
+    rolePermissions: [RolePermissions!]!
+}
+
+"""Full permission row for a role: every module with its current level."""
+type RolePermissions {
+    role: Role!
+    modules: [ModulePermission!]!
+}
+
+input UpdateRolePermissionsInput {
+    entries: [RolePermissionEntryInput!]!
+}
+
+input RolePermissionEntryInput {
+    role: Role!
+    module: Module!
+    level: AccessLevel!
 }
 
 input RegisterInput {

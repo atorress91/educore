@@ -1,5 +1,6 @@
 package com.example.educore.auth.application.commands;
 
+import com.example.educore.auth.application.authorization.RolePermissionService;
 import com.example.educore.auth.application.dto.AuthResponse;
 import com.example.educore.auth.application.dto.UserResponse;
 import com.example.educore.auth.domain.exceptions.AuthException;
@@ -21,6 +22,7 @@ public class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenIssuer tokenIssuer;
+    private final RolePermissionService rolePermissionService;
 
     @Override
     public AuthResponse handle(RegisterUserCommand command) {
@@ -42,6 +44,6 @@ public class RegisterUserCommandHandler implements CommandHandler<RegisterUserCo
         userRepository.save(user);
 
         String token = tokenIssuer.issueFor(user);
-        return new AuthResponse(token, UserResponse.fromUser(user));
+        return new AuthResponse(token, UserResponse.of(user, rolePermissionService.effectiveFor(user.getRole())));
     }
 }
